@@ -8,15 +8,12 @@ function startApp() {
   attachListeners();
 
 }
-let list = []
+
 function ImageData(rawData) {
-  // for(let key in rawData) {
-    // this[key] = rawData[key];
-  this.title = rawData.title
-  list.push(this.title)
-  // }
+  for(let key in rawData) {
+    this[key] = rawData[key];
+  }
 }
-console.log('this is the titles',list);
 
 function loadImgArray(data){
   data.forEach( element => {
@@ -29,7 +26,7 @@ function loadData() {
 
   const success = retrievedInfo => loadImgArray(retrievedInfo);
 
-  $.get('./data/page-1.json', data => {
+  $.get('./data/page-1.json', (data) => {
     if (data.length) {
       success(data);
     } else {
