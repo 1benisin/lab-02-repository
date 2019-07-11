@@ -1,53 +1,44 @@
+
+
 const imgArray = [];
 
+// ---------- CONSTRUCTOR
+function ImageData(rawData) {
+  for (let key in rawData)
+    this[key] = rawData[key];
+  // this.title = rawData.title
+  // list.push(this.title)
+  // }
+}
 
+// ----------  FUNCTIONS
 
 function startApp() {
   loadData();
-  displayPage(imgArray);
-  attachListeners();
-
 }
-let list = []
-function ImageData(rawData) {
-  // for(let key in rawData) {
-    // this[key] = rawData[key];
-  this.title = rawData.title
-  list.push(this.title)
-  // }
-}
-console.log('this is the titles',list);
 
-function loadImgArray(data){
-  data.forEach( element => {
+function loadData() {
+  $.get('./data/page-1.json')
+    .then(data => {
+      loadImgArray(data);
+      displayPage(imgArray);
+      attachListeners();
+    });
+}
+
+function loadImgArray(data) {
+  data.forEach(element => {
     imgArray.push(new ImageData(element));
   });
 }
 
-
-function loadData() {
-
-  const success = retrievedInfo => loadImgArray(retrievedInfo);
-
-  $.get('./data/page-1.json', data => {
-    if (data.length) {
-      success(data);
-    } else {
-      console.log('something went wrong with $.get');
-    }
-  }, 'json');
-
-}
-
 function displayPage(data) {
   const keywordArr = [];
-  console.log(imgArray);
-  console.log(typeof imgArray);
 
   data.forEach(element => {
     let template = $('#photoScript').html();
     let templateScript = Handlebars.compile(template);
-    let context = { 'keyword' : element.keyword, 'title' : element.title, 'image_url' : element.image_url, 'description' : element.description };
+    let context = { 'keyword': element.keyword, 'title': element.title, 'image_url': element.image_url, 'description': element.description };
     let html = templateScript(context);
 
     $('main').append(html);
@@ -65,7 +56,6 @@ function displayPage(data) {
     $('#selectPics').append($newOption);
   });
 }
-
 
 function attachListeners() {
   $('#selectPics').on('change', event => {
@@ -86,22 +76,19 @@ function attachListeners() {
     console.log($filter);
 
     // clear out picture from DOM
-
+    $('main').empty();
     // sort data
+    if ($filter === 'Horns')
+      imgArray.sort((a, b) => a.horns - b.horns);
+    if ($filter === 'Title')
+      imgArray.sort((a, b) => {
+        if (a.title < b.title) return 1
+        if (a.title > b.title) return -1
+        return 0
+      });
 
     // recall render function
-
-
-
-    //if title
-    // data.sort((a,b) => {
-    //   if (a.title > b.title) return 1;
-    //   if (b.title > a.title) return -1;
-   //   return 0;
-   // });
-
-    //if horns
-   // data.sort( (a,b) => a.horns - b.horns );
+    displayPage(imgArray);
 
   });
 }
