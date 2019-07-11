@@ -1,32 +1,30 @@
-html {
-  max-width: 1152px;
-  margin: auto;
-}
+
 
 body {
-  width: 80%;
+  max-width: 1152px;
+  display: flex;
+  flex-direction: column;
   margin: auto;
 }
 
 header {
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-select {
-  float: right;
+  padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 main {
   width: 100%;
-  display: grid;
-  grid-template-columns: 200px 200px 200px 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* grid-template-columns: repeat(4, 25%);
   grid-template-rows: auto;
   grid-gap: 20px;
   justify-items: center;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: center; */
 }
 
 footer {

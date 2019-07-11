@@ -5,6 +5,7 @@ main > section {
   box-sizing: border-box;
   padding: 5px;
   border-radius: 10px;
+  margin: 0.5em;
 }
 
 main > section > img {
