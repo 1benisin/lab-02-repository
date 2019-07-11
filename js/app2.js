@@ -8,7 +8,7 @@ function loadData() {
 
   const success = retrievedInfo => displayPage(retrievedInfo);
 
-  $.get('./data/page-1.json', data => {
+  $.get('./data/page-2.json', data => {
     if (data.length) {
       success(data);
     } else {
@@ -17,20 +17,9 @@ function loadData() {
   }, 'json');
 }
 
+
 function displayPage(data) {
   const keywordArr = [];
-
-
-  //if title
-  // data.sort((a,b) => {
-  //   if (a.title > b.title) return 1;
-  //   if (b.title > a.title) return -1;
-  //   return 0;
-  // });
-
-  //if horns
-  // data.sort( (a,b) => a.horns - b.horns );
-
 
   data.forEach(element => {
 
@@ -46,6 +35,7 @@ function displayPage(data) {
     }
 
   });
+
 
   keywordArr.forEach(element => {
     const $newOption = $('#option-template').clone();
