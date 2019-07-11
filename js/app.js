@@ -2,13 +2,12 @@
 
 const imgArray = [];
 
-// ---------- CONSTRUCTOR
+
+
 function ImageData(rawData) {
-  for (let key in rawData)
+  for (let key in rawData) {
     this[key] = rawData[key];
-  // this.title = rawData.title
-  // list.push(this.title)
-  // }
+  }
 }
 
 // ----------  FUNCTIONS
@@ -82,8 +81,8 @@ function attachListeners() {
       imgArray.sort((a, b) => a.horns - b.horns);
     if ($filter === 'Title')
       imgArray.sort((a, b) => {
-        if (a.title < b.title) return 1
-        if (a.title > b.title) return -1
+        if (a.title < b.title) return -1
+        if (a.title > b.title) return 1
         return 0
       });
 
